@@ -28,6 +28,22 @@ var albumMarconi = {
      ]
  };
 
+var albumTupac = {
+	title: 'All Eyez On Me',
+	artist: 'Tupac Shakur',
+	label: '90\'s Rap',
+	year: '1996',
+	albumArtUrl: 'assets/images/album_covers/15.png',
+	songs: [
+		{ title: "All About U", duration: "4:47" },
+		{ title: "How Do U Want It", duration: "4:47" },
+		{ title: "2 Of Amerikaz Most Wanted", duration: "4:07" },
+		{ title: "California Love", duration: "6:25"}
+	]
+};
+
+var albums = [albumPicaso, albumMarconi, albumTupac];
+
 var createSongRow = function(songNumber, songName, songLength) {
 	var template = 
 		'<tr class="album-view-song-item">'
@@ -59,5 +75,15 @@ var setCurrentAlbum = function(album) {
 };
 
 window.onload = function() {
-	setCurrentAlbum(albumMarconi);
-}
+	var i = 0;
+	setCurrentAlbum(albums[i]);
+	
+	var next = document.getElementById('next-album');
+	next.addEventListener('click', function() {
+		i++;
+		if (i >= albums.length) {
+			i=0;
+		}
+		setCurrentAlbum(albums[i]);
+	})
+};

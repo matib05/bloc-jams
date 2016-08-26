@@ -60,6 +60,22 @@
      width: 5%;
  }
 
+#next-album {
+	font-size: 0.75rem;
+	position: absolute;
+	right: 15%;
+	padding: 0.5rem;
+	background-color: plum;
+	border: solid 1px;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+#next-album:hover {
+	background-color: mediumpurple;
+	cursor: pointer;
+}
+
  @media (max-width: 640px) and (min-width: 320px) {
      .album-view-details {
          text-align: center;
