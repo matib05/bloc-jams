@@ -60,7 +60,7 @@ var setCurrentAlbum = function(album) {
 };
 
 var findParentByClassName = function(element, targetClass) {
-    if (element && document.querySelector(targetClass) {
+    if (element && document.querySelector(targetClass)) {
 		if (element.parentElement) {
 			var currentParent = element.parentElement;
 			while (currentParent.className != targetClass && currentParent.className !== null) {
