@@ -45,7 +45,6 @@ var createSongRow = function(songNumber, songName, songLength) {
 			currentSoundFile.play();
 		}
 		else if (currentlyPlayingSongNumber === songNumber) {
-			// Switch from Pause -> Play button to pause currently playing song.
 			if (currentSoundFile.isPaused()) {
 				currentSoundFile.play();
 				$(this).html(pauseButtonTemplate);
@@ -54,7 +53,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 			else {
 				currentSoundFile.pause();
 				$(this).html(playButtonTemplate);
-				$('.main-control .play-pause').html(playerBarPlayButton);
+				$('.main-controls .play-pause').html(playerBarPlayButton);
 			}
 		}
 	};
@@ -191,8 +190,7 @@ var setSong = function(songNumber) {
 	}
 	currentlyPlayingSongNumber = parseInt(songNumber);
 	currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-	
-	
+	//create sound file
 	currentSoundFile = new buzz.sound( currentSongFromAlbum.audioUrl, { formats: ['mp3'], preload: true });
 	
 	setVolume(currentVolume);
