@@ -176,13 +176,11 @@ var togglePlayFromPlayerBar = function() {
 	console.log($playPausePlayerBar);
 	if (currentSoundFile.isPaused()) {
 		console.log("I GOT HERE");
-		$('.song-item-number').html(pauseButtonTemplate);
-		$('.main-control .play-pause').html(playerBarPauseButton);
+		$(this).html(playerBarPauseButton);	$(getSongNumberCell(currentlyPlayingSongNumber)).html(pauseButtonTemplate);
 		currentSoundFile.play();
 	}
 	else if (currentSoundFile) {
-		$('.song-item-number').html(playButtonTemplate);
-		$('.main-control .play-pause').html(playerBarPlayButton);
+		$(this).html(playerBarPlayButton);	$(getSongNumberCell(currentlyPlayingSongNumber)).html(playButtonTemplate);
 		currentSoundFile.pause();
 	}
 };
@@ -215,5 +213,5 @@ $(document).ready(function() {
 	$previousButton.click(previousSong);
 	$nextButton.click(nextSong);
 	
-	$playPausePlayerBar.click(togglePlayFromPlayerBar );
+	$playPausePlayerBar.click(togglePlayFromPlayerBar);
 });
