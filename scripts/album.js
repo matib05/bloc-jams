@@ -54,7 +54,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 			else {
 				currentSoundFile.pause();
 				$(this).html(pauseButtonTemplate);
-				$('.main-control .play-pause').html(playerBarPauseButton);
+				$('.main-controls .play-pause').html(playerBarPauseButton);
 			}
 		}
 	};
@@ -168,6 +168,7 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+var $pausePlayPlayerbar = $('.main-controls .play-pause');
 
 var setSong = function(songNumber) {
 	if (currentSoundFile) {
@@ -191,8 +192,24 @@ var getSongNumberCell = function(number) {
 	return $('.song-item-number[data-song-number="' + number + '"]');
 };
 
+var togglePlayFromPlayerBar = function() {
+	console.log("I'm in toggle player");
+	console.log($playPausePlayerBar);
+	if (currentSoundFile.isPaused()) {
+		console.log("I GOT HERE");
+		$(this).html(playerBarPauseButton);	$(getSongNumberCell(currentlyPlayingSongNumber)).html(pauseButtonTemplate);
+		currentSoundFile.play();
+	}
+	else if (currentSoundFile) {
+		$(this).html(playerBarPlayButton);	$(getSongNumberCell(currentlyPlayingSongNumber)).html(playButtonTemplate);
+		currentSoundFile.pause();
+	}
+};
+
 $(document).ready(function() {
 	setCurrentAlbum(albumPicaso);
 	$previousButton.click(previousSong);
 	$nextButton.click(nextSong);
+	
+	$pausePlayPlayerbar.click(togglePlayFromPlayerBar);
 });
