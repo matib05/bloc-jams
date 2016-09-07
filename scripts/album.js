@@ -45,7 +45,6 @@ var createSongRow = function(songNumber, songName, songLength) {
 			currentSoundFile.play();
 		}
 		else if (currentlyPlayingSongNumber === songNumber) {
-			// Switch from Pause -> Play button to pause currently playing song.
 			if (currentSoundFile.isPaused()) {
 				currentSoundFile.play();
 				$(this).html(pauseButtonTemplate);
@@ -53,8 +52,8 @@ var createSongRow = function(songNumber, songName, songLength) {
 			}
 			else {
 				currentSoundFile.pause();
-				$(this).html(pauseButtonTemplate);
-				$('.main-control .play-pause').html(playerBarPauseButton);
+				$(this).html(playButtonTemplate);
+				$('.main-controls .play-pause').html(playerBarPlayButton);
 			}
 		}
 	};
@@ -168,6 +167,22 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+var $playPausePlayerBar = $('.main-controls .play-pause');
+
+
+var togglePlayFromPlayerBar = function() {
+	console.log("I'm in toggle player");
+	console.log($playPausePlayerBar);
+	if (currentSoundFile.isPaused()) {
+		console.log("I GOT HERE");
+		$(this).html(playerBarPauseButton);	$(getSongNumberCell(currentlyPlayingSongNumber)).html(pauseButtonTemplate);
+		currentSoundFile.play();
+	}
+	else if (currentSoundFile) {
+		$(this).html(playerBarPlayButton);	$(getSongNumberCell(currentlyPlayingSongNumber)).html(playButtonTemplate);
+		currentSoundFile.pause();
+	}
+};
 
 var setSong = function(songNumber) {
 	if (currentSoundFile) {
@@ -175,7 +190,7 @@ var setSong = function(songNumber) {
 	}
 	currentlyPlayingSongNumber = parseInt(songNumber);
 	currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-	
+	//create sound file
 	currentSoundFile = new buzz.sound( currentSongFromAlbum.audioUrl, { formats: ['mp3'], preload: true });
 	
 	setVolume(currentVolume);
@@ -195,4 +210,6 @@ $(document).ready(function() {
 	setCurrentAlbum(albumPicaso);
 	$previousButton.click(previousSong);
 	$nextButton.click(nextSong);
+	
+	$playPausePlayerBar.click(togglePlayFromPlayerBar);
 });
