@@ -167,6 +167,7 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+var $playPausePlayerBar = $('.main-controls .play-pause');
 
 var setSong = function(songNumber) {
 	if (currentSoundFile) {
@@ -192,8 +193,23 @@ var getSongNumberCell = function(number) {
 	return $('.song-item-number[data-song-number="' + number + '"]');
 };
 
+var togglePlayFromPlayerBar = function() {
+	if (currentSoundFile.isPaused()) {
+		$(this).html(playerBarPauseButton);	
+		$(getSongNumberCell(currentlyPlayingSongNumber)).html(pauseButtonTemplate);
+		currentSoundFile.play();
+	}
+	else if (currentSoundFile) {
+		$(this).html(playerBarPlayButton);	
+		$(getSongNumberCell(currentlyPlayingSongNumber)).html(playButtonTemplate);
+		currentSoundFile.pause();
+	}
+};
+
 $(document).ready(function() {
 	setCurrentAlbum(albumPicaso);
 	$previousButton.click(previousSong);
 	$nextButton.click(nextSong);
+	
+	$playPausePlayerBar.click(togglePlayFromPlayerBar);
 });
